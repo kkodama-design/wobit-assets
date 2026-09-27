@@ -10,7 +10,18 @@
 
   <title>Worbit</title>
 
-  <link rel="apple-touch-icon" href="./worbit-icon-192.png">
+  <link
+    rel="apple-touch-icon"
+    sizes="180x180"
+    href="./apple-touch-icon.png?v=3"
+  >
+
+  <link
+    rel="icon"
+    type="image/png"
+    sizes="32x32"
+    href="./favicon-32.png?v=3"
+  >
 
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="Worbit">
@@ -19,9 +30,26 @@
     content="black-translucent"
   >
 
+  <meta name="mobile-web-app-capable" content="yes">
   <meta name="theme-color" content="#0f1827">
 
   <style>
+    :root {
+      --bg: #f4f5f7;
+      --text: #111111;
+      --muted: #667085;
+      --button: #2563eb;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0f1827;
+        --text: #ffffff;
+        --muted: #9aa7b5;
+        --button: #5f9ff5;
+      }
+    }
+
     * {
       box-sizing: border-box;
     }
@@ -31,8 +59,9 @@
       width: 100%;
       min-height: 100%;
       margin: 0;
-      background: #0f1827;
-      color: #fff;
+      padding: 0;
+      background: var(--bg);
+      color: var(--text);
       font-family:
         -apple-system,
         BlinkMacSystemFont,
@@ -41,44 +70,63 @@
     }
 
     body {
+      min-height: 100dvh;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 32px;
+      padding:
+        calc(32px + env(safe-area-inset-top))
+        calc(24px + env(safe-area-inset-right))
+        calc(32px + env(safe-area-inset-bottom))
+        calc(24px + env(safe-area-inset-left));
     }
 
     .launcher {
       width: 100%;
-      max-width: 360px;
+      max-width: 380px;
       text-align: center;
     }
 
-    .icon {
-      width: 88px;
-      height: 88px;
-      margin: 0 auto 18px;
-      border-radius: 22px;
+    .worbit-logo {
+      width: min(290px, 78vw);
+      margin: 0 auto 28px;
     }
 
-    h1 {
-      margin: 0 0 8px;
-      font-size: 28px;
+    .worbit-logo img {
+      display: block;
+      width: 100%;
+      height: auto;
     }
 
-    p {
+    .logo-white {
+      display: none;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .logo-black {
+        display: none;
+      }
+
+      .logo-white {
+        display: block;
+      }
+    }
+
+    .description {
       margin: 0;
-      color: #9aa7b5;
       font-size: 14px;
       line-height: 1.7;
+      color: var(--muted);
     }
 
-    .open {
+    .open-button {
       display: block;
       margin-top: 28px;
       padding: 15px 20px;
       border-radius: 14px;
-      background: #5da2f8;
-      color: #fff;
+      background: var(--button);
+      color: #ffffff;
+      font-size: 15px;
       font-weight: 700;
       text-decoration: none;
     }
@@ -101,25 +149,33 @@
 <body>
 
   <main class="launcher">
-    <img
-      class="icon"
-      src="./worbit-icon-192.png"
-      alt="Worbit"
-    >
 
-    <h1>Worbit</h1>
+    <div class="worbit-logo">
+      <img
+        class="logo-black"
+        src="./worbit-logo-black.png?v=3"
+        alt="Worbit"
+      >
 
-    <p>
-      このページをSafariの共有メニューから<br>
+      <img
+        class="logo-white"
+        src="./worbit-logo-white.png?v=3"
+        alt="Worbit"
+      >
+    </div>
+
+    <p class="description">
+      Safariの共有メニューから<br>
       「ホーム画面に追加」してください。
     </p>
 
     <a
-      class="open"
+      class="open-button"
       href="https://script.google.com/a/macros/kd-lab.co.jp/s/AKfycbzy9kUb25awwiBywkff7ExurO_1byEoxETdDaeughNi1nMd-Ioi_3escNA0yFXHyDbM/exec"
     >
       Worbitを開く
     </a>
+
   </main>
 
 </body>
