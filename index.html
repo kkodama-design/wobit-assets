@@ -2,42 +2,16 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1, viewport-fit=cover"
-  >
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
   <title>Worbit</title>
 
-  <!-- iPhone ホーム画面 -->
-  <link
-    rel="apple-touch-icon"
-    sizes="180x180"
-    href="https://kkodama-design.github.io/wobit-assets/apple-touch-icon.png?v=4"
-  >
-
-  <link
-    rel="apple-touch-icon-precomposed"
-    href="https://kkodama-design.github.io/wobit-assets/apple-touch-icon.png?v=4"
-  >
-
-  <!-- favicon -->
-  <link
-    rel="icon"
-    type="image/png"
-    sizes="32x32"
-    href="https://kkodama-design.github.io/wobit-assets/favicon-32.png?v=4"
-  >
+  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon-v5.png">
+  <link rel="icon" type="image/png" href="./worbit-favicon-v5.png">
 
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="Worbit">
-
-  <meta
-    name="apple-mobile-web-app-status-bar-style"
-    content="black-translucent"
-  >
-
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="theme-color" content="#0f1827">
 
@@ -58,32 +32,23 @@
       }
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
-    html,
-    body {
+    html, body {
       width: 100%;
       min-height: 100%;
       margin: 0;
       padding: 0;
       background: var(--bg);
       color: var(--text);
-      font-family:
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
 
     body {
       min-height: 100dvh;
-
       display: flex;
       align-items: center;
       justify-content: center;
-
       padding:
         calc(32px + env(safe-area-inset-top))
         calc(24px + env(safe-area-inset-right))
@@ -99,58 +64,38 @@
 
     .worbit-logo {
       display: block;
-
       width: min(290px, 78vw);
-
-      margin:
-        0
-        auto
-        28px;
+      height: auto;
+      margin: 0 auto 28px;
+      visibility: hidden;
     }
 
-    .worbit-logo img {
-      display: block;
-
-      width: 100%;
-      height: auto;
-
-      margin: 0;
+    .worbit-logo.ready {
+      visibility: visible;
     }
 
     .description {
       margin: 0;
-
       font-size: 14px;
       line-height: 1.7;
-
       color: var(--muted);
     }
 
     .open-button {
       display: block;
-
       margin-top: 28px;
-
-      padding:
-        15px
-        20px;
-
+      padding: 15px 20px;
       border-radius: 14px;
-
       background: var(--button);
-
       color: #ffffff;
-
       font-size: 15px;
       font-weight: 700;
-
       text-decoration: none;
     }
   </style>
 
   <script>
-    const WORBIT_URL =
-      "https://script.google.com/a/macros/kd-lab.co.jp/s/AKfycbzy9kUb25awwiBywkff7ExurO_1byEoxETdDaeughNi1nMd-Ioi_3escNA0yFXHyDbM/exec";
+    const WORBIT_URL = "https://script.google.com/a/macros/kd-lab.co.jp/s/AKfycbzy9kUb25awwiBywkff7ExurO_1byEoxETdDaeughNi1nMd-Ioi_3escNA0yFXHyDbM/exec";
 
     const standalone =
       window.navigator.standalone === true ||
@@ -159,42 +104,49 @@
     if (standalone) {
       window.location.replace(WORBIT_URL);
     }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const logo = document.getElementById("worbitLogo");
+      const darkMode = window.matchMedia("(prefers-color-scheme: dark)");
+
+      function updateLogo() {
+        logo.classList.remove("ready");
+        logo.src = darkMode.matches
+          ? "./worbit-logo-white-v5.png"
+          : "./worbit-logo-black-v5.png";
+      }
+
+      logo.addEventListener("load", function () {
+        logo.classList.add("ready");
+      });
+
+      updateLogo();
+
+      if (darkMode.addEventListener) {
+        darkMode.addEventListener("change", updateLogo);
+      }
+    });
   </script>
 </head>
 
 <body>
-
   <main class="launcher">
 
-    <picture class="worbit-logo">
-
-      <!-- ダーク背景では白文字版 -->
-      <source
-        media="(prefers-color-scheme: dark)"
-        srcset="https://kkodama-design.github.io/wobit-assets/worbit-logo-white.png?v=4"
-      >
-
-      <!-- ライト背景では黒文字版 -->
-      <img
-        src="https://kkodama-design.github.io/wobit-assets/worbit-logo-black.png?v=4"
-        alt="Worbit"
-      >
-
-    </picture>
+    <img
+      id="worbitLogo"
+      class="worbit-logo"
+      alt="Worbit"
+    >
 
     <p class="description">
       Safariの共有メニューから<br>
       「ホーム画面に追加」してください。
     </p>
 
-    <a
-      class="open-button"
-      href="https://script.google.com/a/macros/kd-lab.co.jp/s/AKfycbzy9kUb25awwiBywkff7ExurO_1byEoxETdDaeughNi1nMd-Ioi_3escNA0yFXHyDbM/exec"
-    >
+    <a class="open-button" href="https://script.google.com/a/macros/kd-lab.co.jp/s/AKfycbzy9kUb25awwiBywkff7ExurO_1byEoxETdDaeughNi1nMd-Ioi_3escNA0yFXHyDbM/exec">
       Worbitを開く
     </a>
 
   </main>
-
 </body>
 </html>
