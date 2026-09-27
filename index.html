@@ -10,21 +10,29 @@
 
   <title>Worbit</title>
 
+  <!-- iPhone ホーム画面 -->
   <link
     rel="apple-touch-icon"
     sizes="180x180"
-    href="./apple-touch-icon.png?v=3"
+    href="https://kkodama-design.github.io/wobit-assets/apple-touch-icon.png?v=4"
   >
 
+  <link
+    rel="apple-touch-icon-precomposed"
+    href="https://kkodama-design.github.io/wobit-assets/apple-touch-icon.png?v=4"
+  >
+
+  <!-- favicon -->
   <link
     rel="icon"
     type="image/png"
     sizes="32x32"
-    href="./favicon-32.png?v=3"
+    href="https://kkodama-design.github.io/wobit-assets/favicon-32.png?v=4"
   >
 
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="Worbit">
+
   <meta
     name="apple-mobile-web-app-status-bar-style"
     content="black-translucent"
@@ -71,9 +79,11 @@
 
     body {
       min-height: 100dvh;
+
       display: flex;
       align-items: center;
       justify-content: center;
+
       padding:
         calc(32px + env(safe-area-inset-top))
         calc(24px + env(safe-area-inset-right))
@@ -88,46 +98,52 @@
     }
 
     .worbit-logo {
+      display: block;
+
       width: min(290px, 78vw);
-      margin: 0 auto 28px;
+
+      margin:
+        0
+        auto
+        28px;
     }
 
     .worbit-logo img {
       display: block;
+
       width: 100%;
       height: auto;
-    }
 
-    .logo-white {
-      display: none;
-    }
-
-    @media (prefers-color-scheme: dark) {
-      .logo-black {
-        display: none;
-      }
-
-      .logo-white {
-        display: block;
-      }
+      margin: 0;
     }
 
     .description {
       margin: 0;
+
       font-size: 14px;
       line-height: 1.7;
+
       color: var(--muted);
     }
 
     .open-button {
       display: block;
+
       margin-top: 28px;
-      padding: 15px 20px;
+
+      padding:
+        15px
+        20px;
+
       border-radius: 14px;
+
       background: var(--button);
+
       color: #ffffff;
+
       font-size: 15px;
       font-weight: 700;
+
       text-decoration: none;
     }
   </style>
@@ -150,19 +166,21 @@
 
   <main class="launcher">
 
-    <div class="worbit-logo">
+    <picture class="worbit-logo">
+
+      <!-- ダーク背景では白文字版 -->
+      <source
+        media="(prefers-color-scheme: dark)"
+        srcset="https://kkodama-design.github.io/wobit-assets/worbit-logo-white.png?v=4"
+      >
+
+      <!-- ライト背景では黒文字版 -->
       <img
-        class="logo-black"
-        src="./worbit-logo-black.png?v=3"
+        src="https://kkodama-design.github.io/wobit-assets/worbit-logo-black.png?v=4"
         alt="Worbit"
       >
 
-      <img
-        class="logo-white"
-        src="./worbit-logo-white.png?v=3"
-        alt="Worbit"
-      >
-    </div>
+    </picture>
 
     <p class="description">
       Safariの共有メニューから<br>
